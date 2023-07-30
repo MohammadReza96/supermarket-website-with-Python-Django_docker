@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  # config for postgre database     ok
+  db:
+    container_name: postgres_supermarket_website_with_django
+    image: postgres  # to create an image from dockerhub by polling that image
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  # config for python django codes
+  web:
+    container_name: supermarket_website_with_django
+
+    # to create an image from a dockerfile in a special path
+    build: ./supermarket
+
+    # to create an image from a dockerfile in a special path
+    # image: mohammadrz96/sample-django-website:1.0.0
+
+    # type 1
+    command: python manage.py runserver 0.0.0.0:8000
+    # type 2 (it is not ok)
+    # command: ./wait-for-it.sh db:5432 && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+
+    volumes:
+      - ./supermarket:/app
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db

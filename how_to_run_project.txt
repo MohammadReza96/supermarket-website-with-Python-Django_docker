@@ -1,0 +1,19 @@
+###################################################################### activating virtualenv
+1-create a virtualenv---------------> (pip install virtualenv)
+2-activate the virtualenv that you made
+----for mac : source venv/bin/activate
+----for windows : venv\bin\activate
+3-run 'pip install -r requirment.txt'
+4-pip install --upgrade pip  
+###################################################################### run the project as a docker-compose
+2- docker compose up
+###################################################################### open postgres_supermarket_website_with_django container in sh mode 
+1-python manage.py makemigrations
+2-python manage.py makemigrations
+3-python manage.py loaddata all_data.json
+###################################################################### Super User information
+userName = mohammadreza1375
+password = reza1375
+###################################################################### normal User information
+userName = sara1381
+password = setin1381
